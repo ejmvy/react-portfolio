@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom"
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 import LogoComponent from "../subComponents/LogoComponent"
 import PowerButton from "../subComponents/PowerButton"
 import SocialIcons from "../subComponents/SocialIcons"
+import { YinYang } from './AllSvgs';
 
 const MainContainer = styled.div`
   background: ${props => props.theme.body};
@@ -74,7 +75,43 @@ const SKILLS = styled(NavLink)`
   z-index: 1;
 `
 
+const rotate = keyframes`
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+const Center = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &>:first-child {
+    animation: ${rotate} infinite 1.5s linear;
+  }
+
+  &>:last-child {
+    padding-top: 1rem;
+  }
+`
+
 const Main = () => {
+
+  const [click, setClick] = useState(false)
+
   return (
     <MainContainer>
 
@@ -83,9 +120,15 @@ const Main = () => {
         <LogoComponent />
         <SocialIcons />
 
+
+        <Center >
+          <YinYang width={150} height={150} fill='currentColor' />
+          <span>Click here</span>
+        </Center>
+
         <Contact target="_blank" to={{ pathname: 'mailto:ejmcvey91@gmail.com' }}>
           <h2>
-            Say hi....
+            Say helo....
           </h2>
         </Contact>
 
